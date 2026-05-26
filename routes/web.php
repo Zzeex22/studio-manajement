@@ -7,7 +7,6 @@ Route::get('/', function () {
 });
 
 // --- RUTE DASHBOARD UTAMA ---
-// Semua yang sukses login mampir ke sini, nanti datanya diatur sama Controller
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
@@ -30,6 +29,9 @@ Route::middleware(['auth', 'role:admin,partner'])->group(function () {
     Route::resource('clients', App\Http\Controllers\ClientController::class);
     Route::resource('projects', App\Http\Controllers\ProjectController::class);
     Route::resource('finances', App\Http\Controllers\FinanceController::class);
+    
+    // Rute Tambahan untuk Cetak PDF Kwitansi / Invoice Keuangan
+    Route::get('/finances/{finance}/download', [App\Http\Controllers\FinanceController::class, 'downloadInvoice'])->name('finances.download');
 });
 
 

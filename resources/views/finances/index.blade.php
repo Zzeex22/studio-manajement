@@ -45,14 +45,18 @@
                                 <td class="py-2 px-4 border-b text-right font-mono {{ $finance->transaction_type == 'income' ? 'text-green-600' : 'text-red-600' }}">
                                     {{ $finance->transaction_type == 'income' ? '+' : '-' }} Rp {{ number_format($finance->amount, 0, ',', '.') }}
                                 </td>
-                               <td class="py-2 px-4 border-b text-center space-x-2">
-                                    <a href="{{ route('finances.edit', $finance->id) }}" class="text-blue-500 hover:text-blue-700 text-sm font-bold">Edit</a>
+                                <td class="py-2 px-4 border-b text-center">
+                                    <div class="flex items-center justify-center space-x-3">
+                                        <a href="{{ route('finances.download', $finance->id) }}" class="text-green-600 hover:text-green-800 text-sm font-bold">Cetak PDF</a>
+
+                                        <a href="{{ route('finances.edit', $finance->id) }}" class="text-blue-500 hover:text-blue-700 text-sm font-bold">Edit</a>
 
                                         <form action="{{ route('finances.destroy', $finance->id) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-500 hover:text-red-700 text-sm font-bold" onclick="return confirm('Hapus catatan transaksi ini?')">Hapus</button>
                                         </form>
+                                    </div>
                                 </td>
                             </tr>
                             @empty
