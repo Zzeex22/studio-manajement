@@ -55,7 +55,7 @@
         </div>
         
         <div class="absolute bottom-6 w-full text-center text-xs font-medium text-gray-400">
-            &copy; {{ date('Y') }} Dibangun dengan &hearts; oleh 22 DESIGN Tim.
+            &copy; {{ date('Y') }} Dibangun oleh 22 DESIGN Tim.
         </div>
     </div>
 
