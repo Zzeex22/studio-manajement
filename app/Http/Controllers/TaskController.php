@@ -23,14 +23,11 @@ class TaskController extends Controller
 
         $data = ['status' => $request->status];
 
-        // Cek kalau desainer ada upload file
         if ($request->hasFile('design_file')) {
-            // Hapus file lama kalau sebelumnya sudah pernah upload
             if ($project->design_file) {
                 Storage::disk('public')->delete($project->design_file);
             }
             
-            // Simpan file baru ke dalam folder storage/app/public/design_files
             $path = $request->file('design_file')->store('design_files', 'public');
             $data['design_file'] = $path;
         }

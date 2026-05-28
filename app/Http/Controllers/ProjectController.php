@@ -10,14 +10,12 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        // Ambil data project beserta relasi kliennya biar ringan (Eager Loading)
         $projects = Project::with('client')->latest()->get();
         return view('projects.index', compact('projects'));
     }
 
     public function create()
     {
-        // Ambil semua data klien untuk ditampilkan di dropdown form
         $clients = Client::all();
         return view('projects.create', compact('clients'));
     }
