@@ -63,25 +63,18 @@ class FinanceController extends Controller
         return redirect()->route('finances.index')->with('success', 'Catatan transaksi berhasil dihapus.');
     }
 
-    /**
-     * Fungsi Baru: Mengonversi data transaksi menjadi kuitansi resmi berformat PDF
-     */
     public function downloadInvoice(Finance $finance)
     {
-        // Load data relasi proyek dan klien agar bisa ditampilkan di struk nota
         $finance->load('project.client');
 
-        // Merakit data untuk dikirim ke dalam template desain HTML kuitansi
         $data = [
             'finance' => $finance,
             'date' => date('d F Y'),
             'invoice_number' => 'INV-' . $finance->id . date('dmY')
         ];
 
-        // Menerjemahkan halaman HTML tulisan struk menjadi file PDF asli
         $pdf = Pdf::loadView('finances.invoice', $data);
 
-        // Download otomatis file PDF-nya dengan nama sesuai nomor invoice
         return $pdf->download($data['invoice_number'] . '.pdf');
     }
 }
